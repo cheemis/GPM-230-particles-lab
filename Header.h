@@ -7,12 +7,16 @@
 #include <SFML/System.hpp>
 #include <SFML/OpenGL.hpp>
 #include <SFML/Main.hpp>
+#include <iostream>
 
 using namespace std;
 using namespace sf;
 
-
-float particleSizeRange[] = { 10, 50 };
+//global variables
+Vector2f particleSizeRange(1, 30);
+Vector2f particleVelocityRange(10, 500);
+Vector2f particleDeathRange(0.1, 3);
+vector<Color> colors = { Color::Red, Color::Blue, Color::Green, Color::Yellow, Color::Cyan, Color::Magenta, Color::White };
 
 
 class Particle
@@ -24,26 +28,23 @@ class Particle
 		Color shapeColor;
 		float shapeRadius;
 
-		Particle(Color color, float radius, Vector2f position, Vector2f velocity)
+		float deathTime;
+		bool isAlive;
+
+		Particle(Color color, float radius, Vector2f position, Vector2f velocity, float death)
 		{
 			pixelPosition = position;
 			pixelVelocity = velocity;
 
 			shapeColor = color;
 			shapeRadius = radius;
+
+			deathTime = death;
+			isAlive = true;
 			
 		}
 
-		Particle() : Particle(Color::White, 32, Vector2f(512/2, 512/2), Vector2f(0,0))
-		{
-			/*
-			pixelPosition = Vector2f(0, 0);
-			pixelVelocity = Vector2f(0, 0);
-
-			shapeColor = Color::White;
-			shapeRadius = 32;
-			*/
-		}
+		Particle() : Particle(Color::White, 32, Vector2f(512/2, 512/2), Vector2f(0,0), 10) {}
 
 		CircleShape GetShape()
 		{
@@ -56,10 +57,24 @@ class Particle
 			return shape;
 		}
 
+		void SetNewParameters(Vector2f spawnPosition, sf::Color newColor, float newRadius, Vector2f newVelocity, float newDeathTime)
+		{
+			pixelPosition = spawnPosition;
+			shapeColor = newColor;
+			shapeRadius = newRadius;
+			pixelVelocity = newVelocity;
+			deathTime = newDeathTime;
+			isAlive = true;
+		}
+
 
 		void Tick(float deltaTime)
 		{
-			MoveParticle(deltaTime);
+			if (isAlive)
+			{
+				MoveParticle(deltaTime);
+				KillParticle(deltaTime);
+			}
 		}
 
 
@@ -68,7 +83,17 @@ class Particle
 			pixelPosition += pixelVelocity * deltaTime;
 		}
 
-		
+		void KillParticle(float deltaTime)
+		{
+			deathTime -= deltaTime;
+			if (deathTime <= 0)
+			{
+				isAlive = false;
+			}
+		}
 
 };
 
+void SetParticles(vector<Particle>&, bool, Vector2f, Vector2f, Vector2f, Vector2f);
+void RandomizeParticles(vector<Particle>&, Vector2f);
+Color GetRandomColor();

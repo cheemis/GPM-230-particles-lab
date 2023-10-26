@@ -1,14 +1,9 @@
 ﻿  Source.cpp
 C:\Users\nrnolasc\Documents\Education\UCSC\First Year\Fall\GPM 230\Class Work\particleLab\Source.cpp(1,9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\nrnolasc\Documents\Education\UCSC\First Year\Fall\GPM 230\Class Work\particleLab\Source.cpp(9,14): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
+C:\Users\nrnolasc\Documents\Education\UCSC\First Year\Fall\GPM 230\Class Work\particleLab\Header.h(18,29): warning C4305: 'argument': truncation from 'double' to 'T'
           with
           [
-              T=int
+              T=float
           ]
-C:\Users\nrnolasc\Documents\Education\UCSC\First Year\Fall\GPM 230\Class Work\particleLab\Source.cpp(11,18): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Users\nrnolasc\Documents\Education\UCSC\First Year\Fall\GPM 230\Class Work\particleLab\Source.cpp(12,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\nrnolasc\Documents\Education\UCSC\First Year\Fall\GPM 230\Class Work\particleLab\Source.cpp(18,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   particleLab.vcxproj -> C:\Users\nrnolasc\Documents\Education\UCSC\First Year\Fall\GPM 230\Class Work\particleLab\x64\Debug\particleLab.exe
